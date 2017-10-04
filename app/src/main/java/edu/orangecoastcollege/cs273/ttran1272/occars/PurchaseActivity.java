@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 
 public class PurchaseActivity extends AppCompatActivity {
 
-    private Car mCar;
+    public Car mCar;
 
     private EditText carPriceEditText;
     private EditText downPaymentEditText;
@@ -77,14 +77,14 @@ public class PurchaseActivity extends AppCompatActivity {
         double totalCost = mCar.calculateTotalCost();
 
         Intent myIntent = new Intent(this, LoanSummaryActivity.class);
-        myIntent.putExtra("loanTerm", loanTerm);
-        myIntent.putExtra("priceAmount", carPrice);
-        myIntent.putExtra("downPayment", downPayment);
-        myIntent.putExtra("borrowAmt", borrowedAmount);
-        myIntent.putExtra("interestAmt", interestAmount);
-        myIntent.putExtra("monthlyPymt", monthlyPayment);
-        myIntent.putExtra("taxAmount", taxAmount);
-        myIntent.putExtra("totalCost", totalCost);
+        myIntent.putExtra("term", loanTerm);
+        myIntent.putExtra("price", carPrice);
+        myIntent.putExtra("downPmt", downPayment);
+        myIntent.putExtra("borrow", borrowedAmount);
+        myIntent.putExtra("interest", interestAmount);
+        myIntent.putExtra("monthlyPmt", monthlyPayment);
+        myIntent.putExtra("tax", taxAmount);
+        myIntent.putExtra("total", totalCost);
         startActivity(myIntent);
    }
 }

@@ -25,12 +25,14 @@
 
     <TextView
         android:id="@+id/loanSummaryTextView"
+        android:textSize="20sp"
         android:layout_below="@id/loanSummaryTitleTV"
         android:layout_width="match_parent"
         android:layout_height="300dp" />
 
     <TextView
         android:id="@+id/noteTextView"
+        android:textSize="20sp"
         android:layout_below="@id/loanSummaryTextView"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
