@@ -25,8 +25,9 @@ public class PurchaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCar = new Car();
         setContentView(R.layout.activity_purchase);
+        mCar = new Car();
+
     }
 
     public void getInformation() {
