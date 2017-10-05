@@ -1,12 +1,15 @@
 package edu.orangecoastcollege.cs273.ttran1272.occars;
 
 import android.content.Intent;
+import android.icu.text.NumberFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import java.util.Locale;
 
 public class PurchaseActivity extends AppCompatActivity {
 
@@ -27,7 +30,6 @@ public class PurchaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_purchase);
         mCar = new Car();
-
     }
 
     public void getInformation() {
@@ -35,40 +37,36 @@ public class PurchaseActivity extends AppCompatActivity {
         carPriceEditText = (EditText) findViewById(R.id.carPriceET);
         downPaymentEditText = (EditText) findViewById(R.id.downPaymentET);
 
-        threeYearsTermRButton = (RadioButton) findViewById(R.id.threeYearsRadioButton);
-        fourYearsTermRButton = (RadioButton) findViewById(R.id.fourYearsRadioButton2);
-        fiveYearsTermRButton = (RadioButton) findViewById(R.id.fiveYearsRadioButton3);
-
-        loanTermRadioGroup = (RadioGroup) findViewById(R.id.radioButtonGroup);
-        int selectedID = loanTermRadioGroup.getCheckedRadioButtonId();
-
-        switch (selectedID) {
-            case 0:
-                loanTerm = 3;
-                break;
-            case 1:
-                loanTerm = 4;
-                break;
-            case 2:
-                loanTerm = 5;
-                break;
-            default:
-                loanTerm = 0;
-        }
-
         carPrice = Double.parseDouble(carPriceEditText.getText().toString());
         downPayment = Double.parseDouble(downPaymentEditText.getText().toString());
 
         mCar.setPrice(carPrice);
         mCar.setDownPayment(downPayment);
-        mCar.setLoanTerm(loanTerm);
-
     }
 
+
+    public void getLoanTerm(){
+
+        threeYearsTermRButton = (RadioButton) findViewById(R.id.threeYearsRadioButton);
+        fourYearsTermRButton = (RadioButton) findViewById(R.id.fourYearsRadioButton);
+        fiveYearsTermRButton = (RadioButton) findViewById(R.id.fiveYearsRadioButton);
+
+        if (threeYearsTermRButton.isChecked())
+            loanTerm = 3;
+        else if (fourYearsTermRButton.isChecked())
+            loanTerm = 4;
+        else if (fiveYearsTermRButton.isChecked())
+            loanTerm = 5;
+        else
+            loanTerm = 0;
+
+        mCar.setLoanTerm(loanTerm);
+    }
 
     protected void goToLoanReport(View v) {
 
         getInformation();
+        getLoanTerm();
 
         double borrowedAmount = mCar.calculateBorrowedAmount();
         double interestAmount = mCar.calculateInterestAmount();
@@ -76,15 +74,17 @@ public class PurchaseActivity extends AppCompatActivity {
         double taxAmount = mCar.calculateTaxAmount();
         double totalCost = mCar.calculateTotalCost();
 
+        NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);
+
         Intent myIntent = new Intent(this, LoanSummaryActivity.class);
-        myIntent.putExtra("term", loanTerm);
-        myIntent.putExtra("price", carPrice);
-        myIntent.putExtra("downPmt", downPayment);
-        myIntent.putExtra("borrow", borrowedAmount);
-        myIntent.putExtra("interest", interestAmount);
-        myIntent.putExtra("monthlyPmt", monthlyPayment);
-        myIntent.putExtra("tax", taxAmount);
-        myIntent.putExtra("total", totalCost);
+        myIntent.putExtra("term", "" + loanTerm);
+        myIntent.putExtra("price", "" + format.format(carPrice));
+        myIntent.putExtra("downPmt", "" + format.format(downPayment));
+        myIntent.putExtra("borrow", "" + format.format(borrowedAmount));
+        myIntent.putExtra("interest", "" + format.format(interestAmount));
+        myIntent.putExtra("monthlyPmt", format.format(monthlyPayment));
+        myIntent.putExtra("tax", "" + format.format(taxAmount));
+        myIntent.putExtra("total", "" + format.format(totalCost));
         startActivity(myIntent);
    }
 }

@@ -35,7 +35,18 @@
         android:textSize="20sp"
         android:layout_below="@id/loanSummaryTextView"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="150dp" />
+
+    <Button
+        android:id="@+id/returnButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/noteTextView"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:layout_marginTop="105dp"
+        android:onClick="finish"
+        android:text="@string/go_data_entry" />
 
 
 </RelativeLayout>

@@ -98,14 +98,14 @@
             android:text="@string/years3" />
 
         <RadioButton
-            android:id="@+id/fourYearsRadioButton2"
+            android:id="@+id/fourYearsRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/years4" />
 
         <RadioButton
-            android:id="@+id/fiveYearsRadioButton3"
+            android:id="@+id/fiveYearsRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

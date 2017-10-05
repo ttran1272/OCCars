@@ -2,12 +2,16 @@ package edu.orangecoastcollege.cs273.ttran1272.occars;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class LoanSummaryActivity extends AppCompatActivity {
 
     private String report_line1, report_line2, report_line3, report_line4, report_line5, report_line6,
             report_line7, report_line8, report_line9, report_line10, report_line11;
+
+    private String loanTerm, priceAmount, downPayment, borrow, interest, monthlyPayment, tax, totalCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,15 +20,18 @@ public class LoanSummaryActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
+        if (extras == null){
+            Log.e("Extras is null" , "");
+        }
 
-        String loanTerm = extras.getString("term");
-        String priceAmount = extras.getString("price");
-        String downPayment = extras.getString("downPmt");
-        String borrow = extras.getString("borrow");
-        String interest = extras.getString("interest");
-        String monthlyPayment = extras.getString("monthlyPmt");
-        String tax = extras.getString("tax");
-        String totalCost = extras.getString("total");
+        loanTerm = extras.getString("term");
+        priceAmount = extras.getString("price");
+        downPayment = extras.getString("downPmt");
+        borrow = extras.getString("borrow");
+        interest = extras.getString("interest");
+        monthlyPayment = extras.getString("monthlyPmt");
+        tax = extras.getString("tax");
+        totalCost = extras.getString("total");
 
 
         TextView loanSummaryTextView = (TextView) findViewById(R.id.loanSummaryTextView);
@@ -44,12 +51,19 @@ public class LoanSummaryActivity extends AppCompatActivity {
 
 
 
-        loanSummaryTextView.setText(report_line1 + " " + monthlyPayment + report_line2 + priceAmount
-        + report_line3 + " " + downPayment + " " + report_line4 + " " +tax + " " + report_line5 + " "
-        + totalCost + report_line6 + " " + borrow + report_line7 + " " + report_line8 + interest + " "
-                + report_line9 + " " + loanTerm );
+        loanSummaryTextView.setText(report_line1 + " " + monthlyPayment + "\n" + report_line2 + priceAmount
+        + report_line3 + " " + downPayment + " "  + report_line5 + " "
+        + tax + report_line6 + " " + totalCost + report_line7 + " " + borrow + report_line8 + interest + "\n"
+               +  report_line4 + " " + loanTerm + " years.");
 
-        noteTextView.setText(report_line10 + report_line11);
+        noteTextView.setText(report_line9 + report_line10 +  report_line11);
 
     }
+
+
+    public void finish(View v) {
+        this.finish();
+    }
+
+
 }

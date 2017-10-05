@@ -47,7 +47,10 @@ public class Car {
     }
 
     public double calculateBorrowedAmount(){
-        return mPrice - mDownPayment;
+        if (mPrice > mDownPayment)
+            return mPrice - mDownPayment;
+        else
+            return 0;
     }
 
     public double calculateInterestAmount() {
@@ -72,7 +75,10 @@ public class Car {
     }
 
     public double calculateMonthlyPayment() {
-        return calculateTotalCost() / (12 * mLoanTerm) ;
+        if (mLoanTerm > 0)
+            return (calculateBorrowedAmount() + calculateInterestAmount() + calculateTaxAmount())/ (12 * mLoanTerm) ;
+        else
+            return 0;
     }
 
     public double calculateTotalCost(){
